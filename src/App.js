@@ -20,23 +20,29 @@ function List(list) {
     });
 }
 
+// a list of video games
+const videoGames = [
+    {
+        id: 0, title: 'Gears of War', studio: 'Epic Games', cost: 50,
+    },
+    {
+        id: 1, title: 'Apex', studio: 'Respawn Entertainment', cost: 60,
+    },
+];
+
 
 // The main React Component, basically just a Javascript function (function App is an alternative way to do this)
 const App = () => {
 
-    // a list of video games
-    const videoGames = [
-        {
-            id: 0, title: 'Gears of War', studio: 'Epic Games', cost: 50,
-        },
-        {
-            id: 1, title: 'Apex', studio: 'Respawn Entertainment', cost: 60,
-        },
-    ];
+
+
+    // Reacts 'useState' hook, this is basic javascript array destructuring
+    const [searchTerm, setSearchTerm] = React.useState('');
 
     // Basic event handler
     const handleChange = event => {
         console.log(event.target.value);
+        setSearchTerm(event.target.value);
     }
 
     // return some JSX stuff for display
@@ -49,6 +55,9 @@ const App = () => {
             <label htmlFor="search">Search:</label>
             <input id="search" type="text" onChange={handleChange}/>
             <hr/>
+
+            <hr/>
+            <p>Searching for <strong>{searchTerm}</strong></p>
 
             {/* display a list of video games */}
             <h2>Video Game List</h2>
