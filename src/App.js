@@ -1,24 +1,52 @@
 import React from 'react';
 import './App.css';
 
-// A react component, this is just a javascript function
+// welcome message object
+const welcome = {
+    greeting: "Hey,",
+    name: "Jason!",
+};
+
+// a list of video games
+let videoGames = [
+    {
+        id: 0, title: 'Gears of War', studio: 'Epic Games', cost: 50,
+    },
+    {
+        id: 1, title: 'Apex', studio: 'Respawn Entertainment', cost: 60,
+    },
+];
+
+// The main React Component, basically just a Javascript function
 function App() {
 
-    //Do some stuff here
-    const title = 'React';
-
-    // variable types
-    // var - global or local scope, can be reassigned
-    // let - block scoped, can be updated but not re-declared
-    // const - cannot be updated or redeclared
+    // Basic event handler
+    const handleChange = event => {
+        console.log(event.target.value);
+    }
 
     // return some JSX stuff for display
     return (
-        // This is JSX, NOT html
+
         <div>
-            <h1>Hello {title}</h1>
+            <h1>{welcome.greeting} {welcome.name}</h1>
+
+            {/* Inputs */}
             <label htmlFor="search">Search:</label>
-            <input id="search" type="text"/>
+            <input id="search" type="text" onChange={handleChange}/>
+            <hr/>
+
+            {/* display a list of video games */}
+            <h2>Video Game List</h2>
+            {videoGames.map(function(game) {
+                return (
+                    <div key={game.id}>
+                        <span>{game.title}</span>
+                        <span>{game.studio}</span>
+                        <span>{game.cost}</span>
+                    </div>
+                )
+            })}
         </div>
     );
 }
