@@ -7,19 +7,9 @@ const welcome = {
     name: "Jason!",
 };
 
-// a list of video games
-let videoGames = [
-    {
-        id: 0, title: 'Gears of War', studio: 'Epic Games', cost: 50,
-    },
-    {
-        id: 1, title: 'Apex', studio: 'Respawn Entertainment', cost: 60,
-    },
-];
-
 // Create a new React component that can be injected directly into our JSX code
-function List() {
-    return videoGames.map(function (game) {
+function List(list) {
+    return list.list.map(function (game) {
         return (
             <div key={game.id}>
                 <span>{game.title}</span>
@@ -31,8 +21,18 @@ function List() {
 }
 
 
-// The main React Component, basically just a Javascript function
-function App() {
+// The main React Component, basically just a Javascript function (function App is an alternative way to do this)
+const App = () => {
+
+    // a list of video games
+    const videoGames = [
+        {
+            id: 0, title: 'Gears of War', studio: 'Epic Games', cost: 50,
+        },
+        {
+            id: 1, title: 'Apex', studio: 'Respawn Entertainment', cost: 60,
+        },
+    ];
 
     // Basic event handler
     const handleChange = event => {
@@ -62,9 +62,9 @@ function App() {
                 )
             })}
 
-            {/* initialize a new List Component */}
+            {/* initialize a new List Component of video games */}
             <h2>Video Game list component</h2>
-            <List/>
+            <List list={videoGames}/>
         </div>
     );
 }
