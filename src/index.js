@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// Instantiate our App component and tell React where to inject our code
 ReactDOM.render(
   <React.StrictMode>
     <App />

@@ -62,6 +62,7 @@ function App() {
                 )
             })}
 
+            {/* initialize a new List Component */}
             <h2>Video Game list component</h2>
             <List/>
         </div>
