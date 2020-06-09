@@ -17,6 +17,20 @@ let videoGames = [
     },
 ];
 
+// Create a new React component that can be injected directly into our JSX code
+function List() {
+    return videoGames.map(function (game) {
+        return (
+            <div key={game.id}>
+                <span>{game.title}</span>
+                <span>{game.studio}</span>
+                <span>{game.cost}</span>
+            </div>
+        );
+    });
+}
+
+
 // The main React Component, basically just a Javascript function
 function App() {
 
@@ -47,6 +61,9 @@ function App() {
                     </div>
                 )
             })}
+
+            <h2>Video Game list component</h2>
+            <List/>
         </div>
     );
 }
