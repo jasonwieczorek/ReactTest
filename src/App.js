@@ -7,19 +7,6 @@ const welcome = {
     name: "Jason!",
 };
 
-// Create a new React component that can be injected directly into our JSX code
-function List(list) {
-    return list.list.map(function (game) {
-        return (
-            <div key={game.id}>
-                <span>{game.title}</span>
-                <span>{game.studio}</span>
-                <span>{game.cost}</span>
-            </div>
-        );
-    });
-}
-
 // a list of video games
 const videoGames = [
     {
@@ -30,31 +17,13 @@ const videoGames = [
     },
 ];
 
-// A new search component
-const Search = () => {
-
-    // Reacts 'useState' hook, this is basic javascript array destructing
-    const [searchTerm, setSearchTerm] = React.useState('');
-
-    // Basic event handler
-    const handleChange = event => {
-        //console.log(event.target.value);
-        setSearchTerm(event.target.value);
-    }
-
-    return (
-        <div>
-            <label htmlFor="search">Search:</label>
-            <input id="search" type="text" onChange={handleChange}/>
-            <hr/>
-            <p>Searching for <strong>{searchTerm}</strong></p>
-        </div>
-
-    );
-}
-
 // The main React Component, basically just a Javascript function (function App is an alternative way to do this)
 const App = () => {
+
+    // A callback function
+    const searchHandler = event => {
+        console.log(event.target.value);
+    }
 
     // return some JSX stuff for display
     return (
@@ -62,7 +31,8 @@ const App = () => {
             <h1>{welcome.greeting} {welcome.name}</h1>
             <hr/>
 
-            <Search/>
+            // components
+            <Search onSearch={searchHandler}/>
 
             {/* display a list of video games */}
             <h2>Video Game List</h2>
@@ -81,6 +51,41 @@ const App = () => {
             <List list={videoGames}/>
         </div>
     );
+}
+
+// A new search component that takes in some props
+const Search = props => {
+
+    // Reacts 'useState' hook, this is basic javascript array deconstructing
+    const [searchTerm, setSearchTerm] = React.useState('');
+
+    // Basic event handler (integrated with a callback)
+    const handleChange = event => {
+        setSearchTerm(event.target.value);
+        props.onSearch(event);
+    }
+
+    return (
+        <div>
+            <label htmlFor="search">Search:</label>
+            <input id="search" type="text" onChange={handleChange}/>
+            <hr/>
+            <p>Searching for <strong>{searchTerm}</strong></p>
+        </div>
+    );
+}
+
+// Create a new React component that can be injected directly into our JSX code
+function List(list) {
+    return list.list.map(function (game) {
+        return (
+            <div key={game.id}>
+                <span>{game.title}</span>
+                <span>{game.studio}</span>
+                <span>{game.cost}</span>
+            </div>
+        );
+    });
 }
 
 export default App;
