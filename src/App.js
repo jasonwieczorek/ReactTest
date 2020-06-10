@@ -30,34 +30,39 @@ const videoGames = [
     },
 ];
 
+// A new search component
+const Search = () => {
 
-// The main React Component, basically just a Javascript function (function App is an alternative way to do this)
-const App = () => {
-
-
-
-    // Reacts 'useState' hook, this is basic javascript array destructuring
+    // Reacts 'useState' hook, this is basic javascript array destructing
     const [searchTerm, setSearchTerm] = React.useState('');
 
     // Basic event handler
     const handleChange = event => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         setSearchTerm(event.target.value);
     }
 
-    // return some JSX stuff for display
     return (
-
         <div>
-            <h1>{welcome.greeting} {welcome.name}</h1>
-
-            {/* Inputs */}
             <label htmlFor="search">Search:</label>
             <input id="search" type="text" onChange={handleChange}/>
             <hr/>
-
-            <hr/>
             <p>Searching for <strong>{searchTerm}</strong></p>
+        </div>
+
+    );
+}
+
+// The main React Component, basically just a Javascript function (function App is an alternative way to do this)
+const App = () => {
+
+    // return some JSX stuff for display
+    return (
+        <div>
+            <h1>{welcome.greeting} {welcome.name}</h1>
+            <hr/>
+
+            <Search/>
 
             {/* display a list of video games */}
             <h2>Video Game List</h2>
