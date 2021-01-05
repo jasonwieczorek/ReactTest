@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import ExampleClassComponent from './components/ExampleClassComponent';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ExampleFunctionalComponent from './components/ExampleFunctionalComponent';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
         <div>
             {/* everything in {} within jsx can be simple javascript */}
             <ExampleClassComponent/>
-
+            <ExampleFunctionalComponent/>
         </div>
     );
 }

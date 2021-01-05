@@ -1,10 +1,9 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
- * An example Class Component.
+ * An example Class Component, considered legacy for React in todays world.
  *
- * ExampleFunctionalComponent is its Functional equivalent.
+ * ExampleFunctionalComponent is its Functional equivalent and preferred.
  */
 export default class ExampleClassComponent extends React.Component {
 
@@ -23,7 +22,7 @@ export default class ExampleClassComponent extends React.Component {
     // ------------------functions-----------------------
 
     componentDidMount() {
-        console.log('first render is complete!');
+        console.log('class render complete!');
     }
 
     // Event handler for setting title
@@ -37,8 +36,8 @@ export default class ExampleClassComponent extends React.Component {
         return (
             <div>
                 <h1>Class component sample</h1>
-                <label htmlFor="search">type to change the state: </label>
-                <input id="search" type="text" onChange={this.handleInputText}/>
+                <label htmlFor="classComponentInput">type to change the state: </label>
+                <input id="classComponentInput" type="text" onChange={this.handleInputText}/>
                 <p><b>inputText state:</b> {this.state.inputText}</p>
             </div>
         );

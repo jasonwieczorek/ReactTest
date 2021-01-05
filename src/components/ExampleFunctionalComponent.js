@@ -1,47 +1,22 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-/**
- * A sample Class component. Note we export it via new ES6 standards,
- * so we can import it without brackets wherever we want to use it.
- */
-export default class ExampleClassComponent extends React.Component {
+export default function ExampleFunctionalComponent() {
 
-    // constructor with state
-    constructor(props) {
-        super(props);
+    // state
+    const[inputText, setInputText] = React.useState('');
 
-        // function binding goes here
-        this.handleEvent = this.handleEvent.bind(this);
+    // equivalent of componentDidMount
+    React.useEffect(() => {
+       console.log('functional render complete!')
+    }, []);
 
-        this.state = {
-            title: 'Jasons React Application'
-        }
-    }
 
-    // ------------------functions-----------------------
-
-    // simple event handler
-    handleEvent(event) {
-        this.setState({
-            title: event.target.value
-        });
-    }
-
-    componentDidMount() {
-        console.log('first render is complete!');
-    }
-
-    //----------------Render---------------------------
-
-    render() {
-        return (
-            <div>
-                <h1>Class component sample</h1>
-                <label htmlFor="search">type to change the state: </label>
-                <h2>{this.state.title}</h2>
-                <input id="search" type="text" onChange={this.handleEvent}/>
-            </div>
-        );
-    }
+    return(
+        <div>
+            <h1>Functional component sample</h1>
+            <label htmlFor="functionalComponentInput">type to change the state: </label>
+            <input id="functionalComponentInput" type="text" onChange={e => setInputText(e.target.value)}/>
+            <p><b>inputText state:</b> {inputText}</p>
+        </div>
+    );
 }
