@@ -1,8 +1,11 @@
 import React from "react";
 
+/**
+ * An example Functional Component. This is way more concise compared to the equivelant Class Component!
+ */
 export default function ExampleFunctionalComponent() {
 
-    // state
+    // Functional components use React hooks to handle state
     const[inputText, setInputText] = React.useState('');
 
     // equivalent of componentDidMount
@@ -10,13 +13,17 @@ export default function ExampleFunctionalComponent() {
        console.log('functional render complete!')
     }, []);
 
+    // arrow function for event handling (could also have been done inline in the jsx if we wanted like below...)
+    // onChange={e => setInputText(e.target.value)}
+    const handleEvent = event => {
+        setInputText(event.target.value);
+    }
 
     return(
         <div>
-            <h1>Functional component sample</h1>
             <label htmlFor="functionalComponentInput">type to change the state: </label>
-            <input id="functionalComponentInput" type="text" onChange={e => setInputText(e.target.value)}/>
-            <p><b>inputText state:</b> {inputText}</p>
+            <input id="functionalComponentInput" type="text" onChange={handleEvent}/>
+            <p><b>current state:</b> {inputText}</p>
         </div>
     );
 }

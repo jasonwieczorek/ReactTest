@@ -35,10 +35,9 @@ export default class ExampleClassComponent extends React.Component {
     render() {
         return (
             <div>
-                <h1>Class component sample</h1>
-                <label htmlFor="classComponentInput">type to change the state: </label>
+                <label htmlFor="classComponentInput">Type to change some state:   </label>
                 <input id="classComponentInput" type="text" onChange={this.handleInputText}/>
-                <p><b>inputText state:</b> {this.state.inputText}</p>
+                <p><b>current state:</b> {this.state.inputText}</p>
             </div>
         );
     }
