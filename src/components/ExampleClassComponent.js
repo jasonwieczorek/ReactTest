@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * An example Class Component, considered legacy for React in todays world.
+ * An example Class Component, considered legacy for React in today's world.
  *
  * ExampleFunctionalComponent is its Functional equivalent and preferred.
  */

@@ -1,9 +1,9 @@
 import React from "react";
 
 /**
- * An example Functional Component. This is way more concise compared to the equivelant Class Component!
+ * An example Functional Component that passes state back up to a callBackHandler
  */
-const ExampleFunctionalComponent = () => {
+const ExampleFunctionalComponentWithCallbackHandler = props => {
 
     // Functional components use React hooks to handle state
     const[inputText, setInputText] = React.useState('');
@@ -17,15 +17,18 @@ const ExampleFunctionalComponent = () => {
     // onChange={e => setInputText(e.target.value)}
     const handleEvent = event => {
         setInputText(event.target.value);
+
+        // provide a Callback Handler
+        props.onSearch(event);
     }
 
     return(
         <div>
             <label htmlFor="functionalComponentInput">type to change the state: </label>
             <input id="functionalComponentInput" type="text" onChange={handleEvent}/>
-            <p><b>current state:</b> {inputText}</p>
+            <p><b>ExampleFunctionalComponentWithCallbackHandler's State:</b> {inputText}</p>
         </div>
     );
 }
 
-export default ExampleFunctionalComponent;
+export default ExampleFunctionalComponentWithCallbackHandler;
