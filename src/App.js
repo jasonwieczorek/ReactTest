@@ -7,6 +7,7 @@ import {Accordion, Card, Button, Container, Row, Col} from 'react-bootstrap';
 import ExampleListComponent from "./components/ExampleListComponent";
 import ExampleFunctionalComponentWithCallbackHandler from "./components/ExampleFunctionalComponentWithCallbackHandler";
 import ExampleFunctionalComponentForm from "./components/ExampleFunctionalComponentForm";
+import ExampleFunctionalComponentKeySpamEventDelay from "./components/ExampleFunctionalComponentKeySpamEventDelay";
 
 function App() {
 
@@ -100,6 +101,18 @@ function App() {
                                         <ExampleFunctionalComponentForm
                                             isChecked={false}
                                         />
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="5">
+                                        Key Spam Delay Demo
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="5">
+                                    <Card.Body>
+                                        <ExampleFunctionalComponentKeySpamEventDelay/>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
