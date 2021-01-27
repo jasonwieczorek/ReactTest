@@ -55,14 +55,20 @@
   margin-left: 5px;
 }
 
-.menu-style {
-  maxHeight: 80px;
-  maxWidth: 300px;
-  overflowY: scroll;
-  backgroundColor: '#eee';
-  padding: 0px;
-  listStyle: none;
+.listGroup-style{
+  max-height: 200px;
+  width: auto;
+  overflow-y: scroll;
   position: relative;
+}
+
+.listItem-style{
+  position: relative;
+  display: block;
+  padding: 0px 10px; /* adjust here */
+  margin-bottom: 1px;
+  border: 1px solid #ddd;
+  line-height: 1em /* set to text height */
 }
 
 

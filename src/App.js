@@ -55,7 +55,7 @@ function App() {
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
-                                    <Card.Body><ExampleClassComponent/> </Card.Body>
+                                    <Card.Body><DownshiftAutoCompleteExample/> </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
