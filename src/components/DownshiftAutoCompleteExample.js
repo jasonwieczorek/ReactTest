@@ -14,6 +14,7 @@ const videoGames = [
 const DownshiftAutoCompleteExample = (props) => {
 
     const[searchTerm, setSearchTerm] = React.useState('');
+    const[games, setGames] = React.useState([]);
 
     useEffect(() => {
         const timeOut = setTimeout(postAxiosCall, 750);
@@ -21,17 +22,20 @@ const DownshiftAutoCompleteExample = (props) => {
     }, [searchTerm]);
 
     // just gets some games
-    const getGames = () => videoGames;
+    const mockAxiosCall = () => {
+        return videoGames;
+    }
 
     const postAxiosCall = () => {
 
         //put axios shit here
-        console.log("posting for some games...");
-
+        console.log('posting axios call')
+        setGames(mockAxiosCall);
     }
 
     // simply sets the search term for us, this will trigger a useeffect
     const handleSearch = searchTerm => {
+        setGames([]);
         setSearchTerm(searchTerm);
     }
 
@@ -74,7 +78,7 @@ const DownshiftAutoCompleteExample = (props) => {
                         <Row>
                             <ListGroup as="ul" {...getMenuProps()}>
                                 {isOpen &&
-                                videoGames
+                                games
                                     .filter((item) => !inputValue || item.value.includes(inputValue))
                                     .map((item, index) => (
                                         <ListGroup as="li"
