@@ -3,6 +3,7 @@ import React, {useEffect} from "react";
 import Downshift from "downshift";
 import {Col, Container, Row, Form, ListGroup, Button} from "react-bootstrap";
 
+// pretend data from an axios call
 const videoGames = [
     {value: 'Gears of War'},
     {value: 'Apex'},
@@ -16,65 +17,58 @@ const videoGames = [
 
 const DownshiftAutoCompleteExample = (props) => {
 
+    // state
     const [searchTerm, setSearchTerm] = React.useState('');
     const [games, setGames] = React.useState([]);
-    const [selection, setSelection] = React.useState(null);
+    const [selection, setSelection] = React.useState( props.selection ? props.selection : null);
 
+    // triggers an axios call with the current search term if user stops typing for 750ms
     useEffect(() => {
-        if (searchTerm.length > 0 && selection === null) {
-            const timeOut = setTimeout(postAxiosCall, 750);
+
+        if (searchTerm.length > 0) {
+            const timeOut = setTimeout(postAxiosCall, 500);
             return () => clearTimeout(timeOut);
         }
 
     }, [searchTerm]);
 
-    // just gets some games
-    const mockAxiosCall = () => {
-        return videoGames;
-    }
-
+    // mocks an axios call
     const postAxiosCall = () => {
 
-        //put axios shit here
-        console.log('posting axios call')
-        setGames(mockAxiosCall);
+        setGames(videoGames);
     }
 
-    // simply sets the search term for us, this will trigger a useeffect
-    const handleSearch = searchTerm => {
-        setGames([]);
-        setSelection(null);
-        setSearchTerm(searchTerm);
+    // lifts the selected item to the parent component
+    const liftState = (selection) => {
+        props.liftState(selection);
     }
 
-    const handleSelection = chosen => {
-        setSelection(chosen);
-    }
-
+    // handles DownShift's state changes
     const handleStateChange = (changes) => {
-        console.log(changes);
 
         switch (changes.type) {
             case Downshift.stateChangeTypes.changeInput:
                 setGames([]);
                 setSearchTerm(changes.inputValue);
                 break;
+            case Downshift.stateChangeTypes.clickItem:
+                liftState(changes.selectedItem);
+                break;
             default:
-                console.log(changes);
-
         }
     }
 
+    // utility function to set Downshifts internal state
     const itemToString = item => (item ? item.value : '');
 
     return (
 
         <Downshift
-            // onInputValueChange={handleSearch}
-            // onSelect={handleSelection}
+            initialSelectedItem={selection}
             itemToString={itemToString}
             onStateChange={handleStateChange}
         >
+            {/* Downshifts child functions, does things like set up wcag compliance and deals with internal state*/}
             {({
                   getLabelProps,
                   getInputProps,
@@ -93,7 +87,7 @@ const DownshiftAutoCompleteExample = (props) => {
                                 <Form.Label {...getLabelProps()}>Search Game</Form.Label>
                                 <div className='input-group'>
                                     <Form.Control type="text" {...getInputProps()} />
-                                    <Button {...getToggleButtonProps()} aria-label={'toggle menu'}>
+                                    <Button {...getToggleButtonProps()} >
                                         &#8595;
                                     </Button>
                                 </div>
@@ -124,7 +118,6 @@ const DownshiftAutoCompleteExample = (props) => {
                                         ))}
                                 </ListGroup>
                                 }
-
                             </Col>
                         </Row>
                     </Container>

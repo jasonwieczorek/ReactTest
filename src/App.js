@@ -13,7 +13,9 @@ import DownshiftAutoCompleteExample from "./components/DownshiftAutoCompleteExam
 function App() {
 
     // React Hook, creates some state for this function and makes a getter to access it.
-    const[callBackHandlerState, setCallBackHandlerState] = React.useState('');
+    const [callBackHandlerState, setCallBackHandlerState] = React.useState('');
+    const [downShiftSelection, setDownShiftSelection] = React.useState({value: 'Gears of War'});
+
 
     // A simple list that we pass to a child List rendering component
     const list = [
@@ -35,6 +37,11 @@ function App() {
         setCallBackHandlerState(event.target.value);
     };
 
+    const listenToDownShift = selection => {
+
+        setDownShiftSelection(selection);
+    }
+
     // JSX -  everything in {} can be simple javascript
     return (
 
@@ -55,7 +62,10 @@ function App() {
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
-                                    <Card.Body><DownshiftAutoCompleteExample/> </Card.Body>
+                                    <Card.Body>
+                                        <DownshiftAutoCompleteExample selection={downShiftSelection} liftState={listenToDownShift}/>
+                                        <p><b>App.js Downshift state</b>: {downShiftSelection.value}</p>
+                                    </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
