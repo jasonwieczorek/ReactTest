@@ -8,6 +8,7 @@ import ExampleListComponent from "./components/ExampleListComponent";
 import ExampleFunctionalComponentWithCallbackHandler from "./components/ExampleFunctionalComponentWithCallbackHandler";
 import ExampleFunctionalComponentForm from "./components/ExampleFunctionalComponentForm";
 import ExampleFunctionalComponentKeySpamEventDelay from "./components/ExampleFunctionalComponentKeySpamEventDelay";
+import DownshiftAutoCompleteExample from "./components/DownshiftAutoCompleteExample";
 
 function App() {
 
@@ -113,6 +114,18 @@ function App() {
                                 <Accordion.Collapse eventKey="5">
                                     <Card.Body>
                                         <ExampleFunctionalComponentKeySpamEventDelay/>
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="6">
+                                        Downshift (wcag compliant)
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="6">
+                                    <Card.Body>
+                                        <DownshiftAutoCompleteExample/>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>

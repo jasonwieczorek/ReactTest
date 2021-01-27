@@ -28,6 +28,45 @@
   color: #61dafb;
 }
 
+/* new stuff below here... */
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.child {
+  width: 250px;
+  margin: auto;
+}
+
+.relativePosition {
+  position: relative;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+  marginBottom: 10px,
+}
+
+.combobox-style {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.menu-style {
+  maxHeight: 80px;
+  maxWidth: 300px;
+  overflowY: scroll;
+  backgroundColor: '#eee';
+  padding: 0px;
+  listStyle: none;
+  position: relative;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
