@@ -64,7 +64,8 @@ function App() {
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <ExampleClassComponent/>
+                                        <DownshiftAutoCompleteExample selection={downShiftSelection} liftState={listenToDownShift}/>
+                                        <p><b>App.js Downshift state</b>: {downShiftSelection.value}</p>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>

@@ -4,23 +4,33 @@ import Downshift from "downshift";
 import {Col, Container, Row, Form, ListGroup, Button} from "react-bootstrap";
 
 // pretend data from an axios call
-const videoGames = [
-    {value: 'Gears of War'},
-    {value: 'Apex'},
-    {value: 'Call of Duty: Cold War'},
-    {value: 'Feeding Frenzy'},
-    {value: 'Super Game'},
-    {value: 'Contra'},
-    {value: 'Metroid'},
-    {value: 'Mario'},
-]
+const videoGames = [];
+
+function generateListItems() {
+
+    if (videoGames.length === 0) {
+
+        for (let i = 1; i < 2000; i++) {
+
+            videoGames.push({
+                id: i,
+                value: 'Apex ' + i
+            })
+        }
+    }
+
+    return videoGames;
+
+}
 
 const DownshiftAutoCompleteExample = (props) => {
+
+    generateListItems();
 
     // state
     const [searchTerm, setSearchTerm] = React.useState('');
     const [games, setGames] = React.useState([]);
-    const [selection, setSelection] = React.useState( props.selection ? props.selection : null);
+    const [selection, setSelection] = React.useState( '');
 
     // triggers an axios call with the current search term if user stops typing for 750ms
     useEffect(() => {
@@ -61,36 +71,73 @@ const DownshiftAutoCompleteExample = (props) => {
     // utility function to set Downshifts internal state
     const itemToString = item => (item ? item.value : '');
 
-    const comparisonFunction = function (prevProps, nextProps) {
-        return prevProps.items.length === nextProps.items.length;
+    const listGroupComparison = function (prevProps, nextProps) {
+        // these ones are easy if any of these changed, we should re-render
+        if (prevProps.inputValue === nextProps.inputValue) return false;
+
     };
 
     // a memoized thing that will only re-render if the properties passed in change
-    const MemoizedListGroup = React.memo(function({getMenuProps, getItemProps, items, inputValue, highlightedIndex, selectedItem }) {
+    const MemoizedListGroup = React.memo(function({getMenuProps, getItemProps, items, highlightedIndex, selectedItem }) {
         console.log('rendering list group!');
 
         return (
-            <ListGroup as="ul" className="listGroup-style" {...getMenuProps()}>
+            <ListGroup as="ul"  {...getMenuProps()}>
                 {items
                     .map((item, index) => (
-                        <ListGroup.Item as="li" className="listItem-style"
-                                        {...getItemProps({
-                                            key: index,
-                                            item,
-                                            index,
-                                            style: {
-                                                backgroundColor:
-                                                    highlightedIndex === index ? 'lightgray' : 'white',
-                                                fontWeight: selectedItem === item ? 'bold' : 'normal',
-                                            },
-                                        })}
+                        <MemoizedListItem
+                            key={item.id}
+                            getItemProps={getItemProps}
+                            item={item}
+                            highlightedIndex={highlightedIndex}
+                            selectedItem={selectedItem}
+                            index={index}
                         >
                             {item.value}
-                        </ListGroup.Item>
+                        </MemoizedListItem>
                     ))}
             </ListGroup>
         )
-    }, comparisonFunction);
+    }, listGroupComparison);
+
+    const listItemComparison = function (prevProps, nextProps) {
+        // these ones are easy if any of these changed, we should re-render
+        if (prevProps.getItemProps !== nextProps.getItemProps) return false
+        if (prevProps.items !== nextProps.items) return false
+        if (prevProps.index !== nextProps.index) return false
+        if (prevProps.selectedItem !== nextProps.selectedItem) return false
+
+        // this is trickier. We should only re-render if this list item:
+        // 1. was highlighted before and now it's not
+        // 2. was not highlighted before and now it is
+        if (prevProps.highlightedIndex !== nextProps.highlightedIndex) {
+            const wasPrevHighlighted = prevProps.highlightedIndex === prevProps.index
+            const isNowHighlighted = nextProps.highlightedIndex === nextProps.index
+            return wasPrevHighlighted === isNowHighlighted
+        }
+        return true
+    };
+
+    // a memoized thing that will only re-render if the properties passed in change
+    const MemoizedListItem = React.memo(function({getItemProps, item, highlightedIndex, selectedItem, index, ...props}) {
+
+        const isHighlighted = highlightedIndex === index;
+
+        return (
+                <li
+                        {...getItemProps({
+                            item,
+                            index,
+                            style: {
+                                backgroundColor: isHighlighted ? 'lightgray' : 'inherit',
+                            },
+                            ...props
+                        })}
+                        >
+
+                </li>
+        )
+    }, listItemComparison);
 
     return (
 
@@ -110,6 +157,7 @@ const DownshiftAutoCompleteExample = (props) => {
                   highlightedIndex,
                   selectedItem,
                   isOpen,
+                  setItemCount,
               }) => (
                 <div>
                     <Container>
@@ -134,6 +182,7 @@ const DownshiftAutoCompleteExample = (props) => {
                                         inputValue={inputValue}
                                         highlightedIndex={highlightedIndex}
                                         selectedItem={selectedItem}
+                                        setItemCount={setItemCount}
                                     />
 
                                 }
