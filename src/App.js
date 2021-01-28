@@ -4,11 +4,12 @@ import ExampleClassComponent from './components/ExampleClassComponent';
 import ExampleFunctionalComponent from './components/ExampleFunctionalComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Accordion, Card, Button, Container, Row, Col} from 'react-bootstrap';
-import ExampleListComponent from "./components/ExampleListComponent";
+import List from "./components/List";
 import ExampleFunctionalComponentWithCallbackHandler from "./components/ExampleFunctionalComponentWithCallbackHandler";
 import ExampleFunctionalComponentForm from "./components/ExampleFunctionalComponentForm";
 import ExampleFunctionalComponentKeySpamEventDelay from "./components/ExampleFunctionalComponentKeySpamEventDelay";
 import DownshiftAutoCompleteExample from "./components/DownshiftAutoCompleteExample";
+import ExampleFunctionalComponentWithMemoization from "./components/Memoize";
 
 function App() {
 
@@ -63,8 +64,7 @@ function App() {
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <DownshiftAutoCompleteExample selection={downShiftSelection} liftState={listenToDownShift}/>
-                                        <p><b>App.js Downshift state</b>: {downShiftSelection.value}</p>
+                                        <ExampleClassComponent/>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
@@ -81,20 +81,30 @@ function App() {
                             <Card>
                                 <Card.Header>
                                     <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                                        List displaying Props example
+                                        Memoization example
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="2">
-                                    <Card.Body><ExampleListComponent list={list}/></Card.Body>
+                                    <Card.Body><ExampleFunctionalComponentWithMemoization/></Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                             <Card>
                                 <Card.Header>
                                     <Accordion.Toggle as={Button} variant="link" eventKey="3">
-                                        CallBack Handler Example (tree props and state)
+                                        List displaying Props example
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="3">
+                                    <Card.Body><List list={list}/></Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="4">
+                                        CallBack Handler Example (tree props and state)
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="4">
                                     <Card.Body>
                                         <ExampleFunctionalComponentWithCallbackHandler onSearch={handleSearch}/>
                                         <p><b>App.js state</b>: {callBackHandlerState}</p>
@@ -103,11 +113,11 @@ function App() {
                             </Card>
                             <Card>
                                 <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="link" eventKey="4">
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="5">
                                         Form Example
                                     </Accordion.Toggle>
                                 </Card.Header>
-                                <Accordion.Collapse eventKey="4">
+                                <Accordion.Collapse eventKey="5">
                                     <Card.Body>
                                         <ExampleFunctionalComponentForm
                                             isChecked={false}
@@ -117,11 +127,11 @@ function App() {
                             </Card>
                             <Card>
                                 <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="link" eventKey="5">
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="6">
                                         Key Spam Delay Demo
                                     </Accordion.Toggle>
                                 </Card.Header>
-                                <Accordion.Collapse eventKey="5">
+                                <Accordion.Collapse eventKey="6">
                                     <Card.Body>
                                         <ExampleFunctionalComponentKeySpamEventDelay/>
                                     </Card.Body>
@@ -129,14 +139,14 @@ function App() {
                             </Card>
                             <Card>
                                 <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="link" eventKey="6">
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="7">
                                         Downshift (wcag compliant)
                                     </Accordion.Toggle>
                                 </Card.Header>
-                                <Accordion.Collapse eventKey="6">
+                                <Accordion.Collapse eventKey="7">
                                     <Card.Body>
-                                        <DownshiftAutoCompleteExample/>
-                                    </Card.Body>
+                                        <DownshiftAutoCompleteExample selection={downShiftSelection} liftState={listenToDownShift}/>
+                                        <p><b>App.js Downshift state</b>: {downShiftSelection.value}</p>                                    </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
                         </Accordion>
