@@ -61,6 +61,37 @@ const DownshiftAutoCompleteExample = (props) => {
     // utility function to set Downshifts internal state
     const itemToString = item => (item ? item.value : '');
 
+    const comparisonFunction = function (prevProps, nextProps) {
+        return prevProps.items.length === nextProps.items.length;
+    };
+
+    // a memoized thing that will only re-render if the properties passed in change
+    const MemoizedListGroup = React.memo(function({getMenuProps, getItemProps, items, inputValue, highlightedIndex, selectedItem }) {
+        console.log('rendering list group!');
+
+        return (
+            <ListGroup as="ul" className="listGroup-style" {...getMenuProps()}>
+                {items
+                    .map((item, index) => (
+                        <ListGroup.Item as="li" className="listItem-style"
+                                        {...getItemProps({
+                                            key: index,
+                                            item,
+                                            index,
+                                            style: {
+                                                backgroundColor:
+                                                    highlightedIndex === index ? 'lightgray' : 'white',
+                                                fontWeight: selectedItem === item ? 'bold' : 'normal',
+                                            },
+                                        })}
+                        >
+                            {item.value}
+                        </ListGroup.Item>
+                    ))}
+            </ListGroup>
+        )
+    }, comparisonFunction);
+
     return (
 
         <Downshift
@@ -96,27 +127,15 @@ const DownshiftAutoCompleteExample = (props) => {
                         <Row>
                             <Col>
                                 {isOpen &&
+                                    <MemoizedListGroup
+                                        getMenuProps={getMenuProps}
+                                        getItemProps={getItemProps}
+                                        items={games}
+                                        inputValue={inputValue}
+                                        highlightedIndex={highlightedIndex}
+                                        selectedItem={selectedItem}
+                                    />
 
-                                <ListGroup as="ul" className="listGroup-style" {...getMenuProps()}>
-                                    {games
-                                        .filter((item) => !inputValue || item.value.toLowerCase().includes(inputValue.toLowerCase()))
-                                        .map((item, index) => (
-                                            <ListGroup.Item as="li" className="listItem-style"
-                                                            {...getItemProps({
-                                                                key: `${item.value}${index}`,
-                                                                item,
-                                                                index,
-                                                                style: {
-                                                                    backgroundColor:
-                                                                        highlightedIndex === index ? 'lightgray' : 'white',
-                                                                    fontWeight: selectedItem === item ? 'bold' : 'normal',
-                                                                },
-                                                            })}
-                                            >
-                                                {item.value}
-                                            </ListGroup.Item>
-                                        ))}
-                                </ListGroup>
                                 }
                             </Col>
                         </Row>
