@@ -20,15 +20,25 @@ const Memoize = () => {
         setInputText(event.target.value);
     }
 
+
+    // a memoized thing that will only re-render if the properties passed in change
+    const MemoizedList = React.memo(function({list}){
+        return (
+            <div>
+                {list.map(function (list) {
+                    return <div key={list.id}>{list.title}</div>;
+                })}
+            </div>
+        )
+    });
+
     return(
         <div>
             <label htmlFor="functionalComponentInput">type to change the state: </label>
             <input id="functionalComponentInput" type="text" onChange={handleEvent}/>
             <p><b>current state:</b> {inputText}</p>
-            <List list={list}/>
+            <MemoizedList list={list}/>
         </div>
-
-
     );
 }
 
