@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExampleFunctionalComponent suite Matches the last test snapshot 1`] = `
+<div>
+  <label
+    htmlFor="functionalComponentInput"
+  >
+    type to change the state: 
+  </label>
+  <input
+    id="functionalComponentInput"
+    onChange={[Function]}
+    type="text"
+    value="test"
+  />
+  <p>
+    <b>
+      current state:
+    </b>
+     
+    test
+  </p>
+</div>
+`;
