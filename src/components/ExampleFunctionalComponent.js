@@ -3,10 +3,10 @@ import React from "react";
 /**
  * An example Functional Component. This is way more concise compared to the equivelant Class Component!
  */
-const ExampleFunctionalComponent = () => {
+const ExampleFunctionalComponent = props => {
 
     // Functional components use React hooks to handle state
-    const[inputText, setInputText] = React.useState('');
+    const[inputText, setInputText] = React.useState(props.inputText ? props.inputText : '');
 
     // equivalent of componentDidMount
     React.useEffect(() => {
@@ -22,7 +22,7 @@ const ExampleFunctionalComponent = () => {
     return(
         <div>
             <label htmlFor="functionalComponentInput">type to change the state: </label>
-            <input id="functionalComponentInput" type="text" onChange={handleEvent}/>
+            <input id="functionalComponentInput" value={props.inputText} type="text" onChange={handleEvent}/>
             <p><b>current state:</b> {inputText}</p>
         </div>
     );

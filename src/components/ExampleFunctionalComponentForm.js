@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Form, Container, Row, Col} from 'react-bootstrap';
+import {Form, Container, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {ListGroup} from "react-bootstrap";
 
 /**
@@ -69,7 +69,7 @@ const ExampleFunctionalComponentForm = (props) => {
 
     return(
         <Form>
-            <Form.Group controlId="formBasicCheckbox">
+            <Form.Group controlId="postProcessor">
                 <Form.Check
                     type="checkbox"
                     label="Convert final Value"
@@ -83,20 +83,16 @@ const ExampleFunctionalComponentForm = (props) => {
                     <>
                         <br/>
                         <Container>
-                            <Row>
-                                <Col sm={4}>
-                                    <Form.Label>Search Game</Form.Label>
-                                    <Form.Control type="text" value={gameSearch} onChange={handleSearch} placeholder="filter" />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Game Selection</Form.Label>
-                                    <Form.Control as="select" multiple>
-                                        {games.map(function(game) {
-                                            return <option value={game.id}>{game.title}</option>
-                                        })}
-                                    </Form.Control>
-                                </Col>
-                            </Row>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    placeholder="Recipient's username"
+                                    aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2"
+                                />
+                                <InputGroup.Append>
+                                    <Button variant="outline-secondary">Button</Button>
+                                </InputGroup.Append>
+                            </InputGroup>
                         </Container>
 
                     </>
